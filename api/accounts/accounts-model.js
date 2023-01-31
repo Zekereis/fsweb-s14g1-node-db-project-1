@@ -1,21 +1,25 @@
+const db = require("../../data/db-config")
+
 const getAll = () => {
-  // KODLAR BURAYA
+  return db("accounts")
 }
 
 const getById = id => {
-  // KODLAR BURAYA
+  return db("accounts").where("id" , id).first()
 }
 
-const create = account => {
-  // KODLAR BURAYA
+const create = async account => {
+  const [id] = await db("accounts").insert(account)
+  return getById(id)
 }
 
-const updateById = (id, account) => {
-  // KODLAR BURAYA
+const updateById = async (id, account) => {
+  await db("accounts").where("id",id).update(account)
+  return getById(id)
 }
 
 const deleteById = id => {
-  // KODLAR BURAYA
+  return db("accounts").where("id",id).delete()
 }
 
 module.exports = {
